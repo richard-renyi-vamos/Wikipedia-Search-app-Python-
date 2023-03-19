@@ -1,0 +1,31 @@
+# WIKIPEDIA SEARCH APP
+
+import wikipedia
+import tkinter as tk
+from tkinter import messagebox
+
+def search_wikipedia():
+    query = entry.get()
+    try:
+        page = wikipedia.page(query)
+        messagebox.showinfo(page.title, page.summary)
+    except wikipedia.exceptions.PageError:
+        messagebox.showerror("Error", "Page not found")
+    except wikipedia.exceptions.DisambiguationError as e:
+        messagebox.showwarning("Warning", "Disambiguation page found. Try a more specific query.")
+
+root = tk.Tk()
+root.title("Wikipedia Search")
+
+label = tk.Label(root, text="Enter a question to search on Wikipedia:")
+label.pack()
+
+entry = tk.Entry(root, width=50)
+entry.pack()
+
+button = tk.Button(root, text="Search", command=search_wikipedia)
+button.pack()
+
+root.mainloop()
+
+# CREATED WITH THE HELP OF CHAT-GPT 4: https://chat.openai.com/chat
